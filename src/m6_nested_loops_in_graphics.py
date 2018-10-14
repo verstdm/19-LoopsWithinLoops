@@ -80,9 +80,29 @@ def draw_L(window, circle, r, c):
     and m and n are small, positive integers.
     """
     # ------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # DONE: 2. Implement and test this function.
     #     The testing code is already written for you (above).
     # ------------------------------------------------------------------
+    orx = circle.center.x
+    ory = circle.center.y
+    for i in range(3):
+        circle.center.x = orx + 2 * circle.radius * i
+        circle.center.y = ory
+        for k in range(r + 4):
+            ci = rg.Circle(rg.Point(circle.center.x, circle.center.y), circle.radius)
+            ci.fill_color = circle.fill_color
+            ci.attach_to(window)
+            window.render(.1)
+            circle.center.y = ory + 2 * circle.radius * k
+    for i in range(c):
+        circle.center.x = orx + 6 * circle.radius + 2 * circle.radius * i
+        circle.center.y = ory + 2 * r * circle.radius
+        for k in range(3):
+            ci = rg.Circle(rg.Point(circle.center.x, circle.center.y), circle.radius)
+            ci.fill_color = circle.fill_color
+            ci.attach_to(window)
+            window.render(.1)
+            circle.center.y = circle.center.y + 2 * circle.radius
 
 
 def run_test_draw_wall_on_right():
@@ -121,9 +141,22 @@ def draw_wall_on_right(rectangle, n, window):
     and n is a small, positive integer.
     """
     # ------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # DONE: 3. Implement and test this function.
     #     The testing code is already written for you (above).
     # ------------------------------------------------------------------
+    p1 = rectangle.get_upper_left_corner()
+    p2 = rectangle.get_lower_right_corner()
+    for i in range(n):
+        p1.x = rectangle.get_upper_left_corner().x
+        p1.y = p1.y + rectangle.get_height()
+        p2.x = rectangle.get_lower_right_corner().x
+        p2.y = p2.y + rectangle.get_height()
+        for k in range(i + 1):
+            rec = rg.Rectangle(p1, p2)
+            rec.attach_to(window)
+            window.render(.1)
+            p1.x = p1.x - rec.get_width()
+            p2.x = p2.x - rec.get_width()
 
 
 # ----------------------------------------------------------------------
